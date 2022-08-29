@@ -12,6 +12,7 @@ public class OrderDetailInfo {
 
     }
 
+    // used for hibernate and JPA
     public OrderDetailInfo(String id,
                            String productCode,
                            String productName,

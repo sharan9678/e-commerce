@@ -36,4 +36,16 @@ public class OrderDetails implements Serializable{
     @JoinColumn(name = "PRODUCT_ID", nullable = false,
             foreignKey = @ForeignKey(name = "ORDER_DETAIL_PROD_FK"))
     private Product product;
+
+    @Override
+    public String toString() {
+        return "OrderDetails{" +
+                "id='" + id + '\'' +
+                ", amount=" + amount +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", order=" + order +
+                ", product=" + product +
+                '}';
+    }
 }

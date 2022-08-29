@@ -39,4 +39,18 @@ public class Order implements Serializable {
 
     @Column(name = "ORDER_NUM", nullable = false)
     private int orderNum;
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", amount=" + amount +
+                ", customerName='" + customerName + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", orderDate=" + orderDate +
+                ", orderNum=" + orderNum +
+                '}';
+    }
 }

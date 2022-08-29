@@ -1,5 +1,6 @@
 package com.sookshmas.ecommerce.validator;
 
+import com.sookshmas.ecommerce.dao.ProductDAO;
 import com.sookshmas.ecommerce.entity.Product;
 import com.sookshmas.ecommerce.form.ProductForm;
 import org.springframework.validation.Errors;
@@ -25,7 +26,7 @@ public class ProductFormValidator implements Validator {
             if (code.matches("\\s+")) {
                 errors.rejectValue("code", "Pattern.productForm.code");
             } else if (productForm.isNewProduct()) {
-                Product product = productDAO.findProduct(code);
+                Product product = ProductDAO.findProduct(code);
                 if (product != null) {
                     errors.rejectValue("code", "Duplicate.productForm.code");
                 }

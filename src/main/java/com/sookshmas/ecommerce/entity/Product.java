@@ -31,4 +31,14 @@ public class Product implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATE_DATE", nullable = false)
     private Date createDate;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", createDate=" + createDate +
+                '}';
+    }
 }

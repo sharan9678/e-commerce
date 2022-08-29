@@ -23,7 +23,6 @@ public class CustomerFormValidator implements Validator {
         if (!isValidEmailAddress(customerForm.getEmail())) {
             errors.rejectValue("email", "Pattern.customerForm.email");
         }
-
     }
 
     public boolean isValidEmailAddress(String email) {

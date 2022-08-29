@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Account implements Serializable {
+
     private static final long serialVersionUID = -2054386655979281969L;
 
     private static final String ROLE_MANAGER = "MANAGER";
