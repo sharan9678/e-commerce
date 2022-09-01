@@ -9,8 +9,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "PRODUCTS")
-@Getter
-@Setter
 public class Product implements Serializable {
     private static final float serialVersionUID = -1000119078147252957L;
 
@@ -31,6 +29,46 @@ public class Product implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATE_DATE", nullable = false)
     private Date createDate;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
     @Override
     public String toString() {

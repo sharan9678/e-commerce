@@ -11,8 +11,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="ACCOUNTS")
-@Getter
-@Setter
 public class Account implements Serializable {
 
     private static final long serialVersionUID = -2054386655979281969L;
@@ -32,6 +30,38 @@ public class Account implements Serializable {
 
     @Column(name = "USER_ROLE", length = 20, nullable = false)
     private String userRole;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
 
     @Override
     public String toString() {

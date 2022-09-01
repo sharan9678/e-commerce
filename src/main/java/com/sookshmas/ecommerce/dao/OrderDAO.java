@@ -1,20 +1,25 @@
 package com.sookshmas.ecommerce.dao;
 
 import com.sookshmas.ecommerce.entity.Order;
-import com.sookshmas.ecommerce.entity.OrderDetails;
+import com.sookshmas.ecommerce.entity.OrderDetail;
 import com.sookshmas.ecommerce.entity.Product;
 import com.sookshmas.ecommerce.model.*;
+import com.sookshmas.ecommerce.pagination.PaginationResult;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Transactional
+@Repository
 public class OrderDAO {
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -22,12 +27,13 @@ public class OrderDAO {
     private ProductDAO productDAO;
 
     private int getMaxOrderNum() {
-        String sql = "Select max(o.orderNum) from " + Order.class.getName() + "o";
+        String sql = "Select max(o.orderNum) from " + Order.class.getName() + " o ";
         Session session = this.sessionFactory.getCurrentSession();
         Query<Integer> query = session.createQuery(sql, Integer.class);
         Integer value = (Integer) query.getSingleResult();
-        if (value == null)
+        if (value == null) {
             return 0;
+        }
         return value;
     }
 
@@ -54,7 +60,7 @@ public class OrderDAO {
         List<CartLineInfo> lines = cartInfo.getCartLines();
 
         for (CartLineInfo line : lines) {
-            OrderDetails detail = new OrderDetails();
+            OrderDetail detail = new OrderDetail();
             detail.setId(UUID.randomUUID().toString());
             detail.setOrder(order);
             detail.setAmount(line.getAmount());
@@ -75,17 +81,17 @@ public class OrderDAO {
     }
 
     // @page = 1, 2, ...
-//    public PaginationResult<OrderInfo> listOrderInfo(int page, int maxResult, int maxNavigationPage) {
-//        String sql = "Select new " + OrderInfo.class.getName()//
-//                + "(ord.id, ord.orderDate, ord.orderNum, ord.amount, "
-//                + " ord.customerName, ord.customerAddress, ord.customerEmail, ord.customerPhone) " + " from "
-//                + Order.class.getName() + " ord "//
-//                + " order by ord.orderNum desc";
-//
-//        Session session = this.sessionFactory.getCurrentSession();
-//        Query<OrderInfo> query = session.createQuery(sql, OrderInfo.class);
-//        return new PaginationResult<OrderInfo>(query, page, maxResult, maxNavigationPage);
-//    }
+    public PaginationResult<OrderInfo> listOrderInfo(int page, int maxResult, int maxNavigationPage) {
+        String sql = "Select new " + OrderInfo.class.getName()//
+                + "(ord.id, ord.orderDate, ord.orderNum, ord.amount, "
+                + " ord.customerName, ord.customerAddress, ord.customerEmail, ord.customerPhone) " + " from "
+                + Order.class.getName() + " ord "//
+                + " order by ord.orderNum desc";
+
+        Session session = this.sessionFactory.getCurrentSession();
+        Query<OrderInfo> query = session.createQuery(sql, OrderInfo.class);
+        return new PaginationResult<OrderInfo>(query, page, maxResult, maxNavigationPage);
+    }
 
     public Order findOrder(String orderId) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -105,7 +111,7 @@ public class OrderDAO {
     public List<OrderDetailInfo> listOrderDetailInfos(String orderId) {
         String sql = "Select new " + OrderDetailInfo.class.getName() //
                 + "(d.id, d.product.code, d.product.name , d.quanity,d.price,d.amount) "//
-                + " from " + OrderDetails.class.getName() + " d "//
+                + " from " + OrderDetail.class.getName() + " d "//
                 + " where d.order.id = :orderId ";
 
         Session session = this.sessionFactory.getCurrentSession();

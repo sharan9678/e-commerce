@@ -1,16 +1,11 @@
 package com.sookshmas.ecommerce.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "ORDER_DETAILS")
-@Getter
-@Setter
-public class OrderDetails implements Serializable{
+public class OrderDetail implements Serializable{
 
     private static final long serialVersionUID = 7550745928843183535L;
 
@@ -36,6 +31,54 @@ public class OrderDetails implements Serializable{
     @JoinColumn(name = "PRODUCT_ID", nullable = false,
             foreignKey = @ForeignKey(name = "ORDER_DETAIL_PROD_FK"))
     private Product product;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     @Override
     public String toString() {
