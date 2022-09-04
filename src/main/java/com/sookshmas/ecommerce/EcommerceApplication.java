@@ -1,13 +1,16 @@
 package com.sookshmas.ecommerce;
 
+import com.sookshmas.ecommerce.model.Category;
 import com.sookshmas.ecommerce.model.Product;
+import com.sookshmas.ecommerce.service.CategoryService;
 import com.sookshmas.ecommerce.service.ProductService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication()
 public class EcommerceApplication {
 
     public static void main(String[] args) {
@@ -27,4 +30,10 @@ public class EcommerceApplication {
         };
     }
 
+    @Bean
+    CommandLineRunner addCategories(CategoryService categoryService) {
+        return args -> {
+            categoryService.createCategory(new Category("hello", "hello", "hello"));
+        };
+    }
 }
